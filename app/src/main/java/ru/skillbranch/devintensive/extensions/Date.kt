@@ -71,5 +71,30 @@ enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
-    DAY
+    DAY;
+
+    fun plural(value: Int): String {
+        return when (this) {
+            SECOND -> "$value ${when (value % 10) {
+                1 -> "секунду"
+                in 2..4 -> "секунды"
+                else -> "секунд"
+            }}"
+            MINUTE -> "$value ${when (value % 10) {
+                1 -> "минуту"
+                in 2..4 -> "минуты"
+                else -> "минут"
+            }}"
+            HOUR -> "$value ${when (value % 10) {
+                1 -> "час"
+                in 2..4 -> "часа"
+                else -> "часов"
+            }}"
+            DAY -> "$value ${when (value % 10) {
+                1 -> "день"
+                in 2..4 -> "дня"
+                else -> "дней"
+            }}"
+        }
+    }
 }

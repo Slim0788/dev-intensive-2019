@@ -1,10 +1,10 @@
 package ru.skillbranch.devintensive.extensions
 
-fun String.truncate(num: Int = 16): String {
-    return if (this.trim().length < num) {
+fun String.truncate(length: Int = 16): String {
+    return if (this.trim().length < length) {
         this.trim()
     } else {
-        this.substring(0, num).trim() + "..."
+        this.substring(0, length).trim() + "..."
     }
 }
 
