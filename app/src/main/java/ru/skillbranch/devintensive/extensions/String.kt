@@ -7,3 +7,12 @@ fun String.truncate(num: Int = 16): String {
         this.substring(0, num).trim() + "..."
     }
 }
+
+fun String.stripHtml() =
+    this.replace("&quot;", "\"")
+        .replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt", ">")
+        .replace("&apos", "'")
+        .replace("\\s+".toRegex(), " ")
+        .replace("(<(/?[^>]+)>)".toRegex(), "")
