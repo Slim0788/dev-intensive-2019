@@ -45,14 +45,14 @@ dependencies {
 
 }
 
-tasks.withType(Test) {
-    testLogging {
-        exceptionFormat "full"
-        events "failed", "passed"
-        info.events = ["failed"]
-        showExceptions true
-        showCauses true
-        showStackTraces true
-        info.exceptionFormat = "full"
-    }
-}
+//tasks.withType(Test) {
+//    testLogging {
+//        exceptionFormat "full"
+//        events "failed", "passed"
+//        info.events = ["failed"]
+//        showExceptions true
+//        showCauses true
+//        showStackTraces true
+//        info.exceptionFormat = "full"
+//    }
+//}
