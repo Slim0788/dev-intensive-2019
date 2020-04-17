@@ -4,12 +4,14 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.models.Bender
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,15 +40,25 @@ class MainActivity : AppCompatActivity() {
 
         textTxt.text = benderObj.askQuestion()
 
-        sendBtn.setOnClickListener {
-            val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
-            messageEt.setText("")
+        sendBtn.setOnClickListener { sendAnswer() }
 
-            val (r, g, b) = color
-            benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
-            textTxt.text = phrase
-
+        messageEt.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == 123) {
+                sendAnswer()
+            }
+            false
         }
+    }
+
+    private fun sendAnswer() {
+        val (phrase, color) = benderObj.listenAnswer(
+            messageEt.text.toString().toLowerCase(Locale.getDefault())
+        )
+        messageEt.setText("")
+
+        val (r, g, b) = color
+        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+        textTxt.text = phrase
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
