@@ -2,6 +2,8 @@ package ru.skillbranch.devintensive.extensions
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 
@@ -14,9 +16,11 @@ fun Activity.hideKeyboard() {
 }
 
 fun Activity.isKeyboardOpen(): Boolean {
-    return false
+    val rootView = findViewById<View>(android.R.id.content)
+    val rect = Rect()
+    rootView.getWindowVisibleDisplayFrame(rect)
+    val heightDiff = rootView.height - rect.height()
+    return heightDiff > 100
 }
 
-fun Activity.isKeyboardClosed(): Boolean {
-    return false
-}
+fun Activity.isKeyboardClosed(): Boolean = isKeyboardOpen().not()
